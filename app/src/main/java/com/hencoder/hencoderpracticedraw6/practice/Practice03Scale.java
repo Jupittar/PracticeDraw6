@@ -7,37 +7,57 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-
 import com.hencoder.hencoderpracticedraw6.R;
+import com.hencoder.hencoderpracticedraw6.Utils;
 
 public class Practice03Scale extends RelativeLayout {
-    Button animateBt;
-    ImageView imageView;
+  Button animateBt;
+  ImageView imageView;
 
-    public Practice03Scale(Context context) {
-        super(context);
-    }
+  int state;
+  int stateCount = 4;
 
-    public Practice03Scale(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-    }
+  public Practice03Scale(Context context) {
+    super(context);
+  }
 
-    public Practice03Scale(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-    }
+  public Practice03Scale(Context context, @Nullable AttributeSet attrs) {
+    super(context, attrs);
+  }
 
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
+  public Practice03Scale(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    super(context, attrs, defStyleAttr);
+  }
 
-        animateBt = (Button) findViewById(R.id.animateBt);
-        imageView = (ImageView) findViewById(R.id.imageView);
+  @Override
+  protected void onAttachedToWindow() {
+    super.onAttachedToWindow();
 
-        animateBt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                // TODO 在这里处理点击事件，通过 View.animate().scaleX/Y() 来让 View 放缩
-            }
-        });
-    }
+    animateBt = (Button) findViewById(R.id.animateBt);
+    imageView = (ImageView) findViewById(R.id.imageView);
+
+    animateBt.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(final View v) {
+        // TODO 在这里处理点击事件，通过 View.animate().scaleX/Y() 来让 View 放缩
+        switch (state) {
+          case 0:
+            imageView.animate().scaleX(1.5F);
+            break;
+          case 1:
+            imageView.animate().scaleX(1);
+            break;
+          case 2:
+            imageView.animate().scaleY(.5F);
+            break;
+          case 3:
+            imageView.animate().scaleY(1);
+            break;
+        }
+
+        state++;
+        if (state == stateCount) state = 0;
+      }
+    });
+  }
 }
